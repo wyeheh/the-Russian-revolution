@@ -1,0 +1,82 @@
+import tkinter as tk
+import random
+
+def create_abstraction():
+    canvas.delete("all")
+    # Generate random properties
+    num_points = random.randint(3, 15)
+    colors = ['#{:06x}'.format(random.randint(0, 0xFFFFFF)) for _ in range(5)]
+    wobble_factor = random.randint(5, 50)
+    chaos_level = random.randint(1, 10)
+    
+    # Create random polygon
+    points = []
+    for _ in range(num_points):
+        x = random.randint(50, 350) + random.randint(-wobble_factor, wobble_factor)
+        y = random.randint(50, 350) + random.randint(-wobble_factor, wobble_factor)
+        points.extend([x, y])
+    
+    # Draw chaotic shape
+    canvas.create_polygon(points, 
+                        fill=random.choice(colors),
+                        outline=random.choice(colors),
+                        width=random.randint(1, 20),
+                        smooth=random.choice([True, False]))
+    
+    # Add random squiggles
+    for _ in range(chaos_level * 2):
+        canvas.create_line(
+            random.randint(0, 400),
+            random.randint(0, 400),
+            random.randint(0, 400),
+            random.randint(0, 400),
+            fill=random.choice(colors),
+            width=random.randint(1, 10),
+            smooth=random.choice([True, False])
+        )
+    
+    # Add mysterious circles
+    for _ in range(chaos_level):
+        canvas.create_oval(
+            random.randint(0, 400),
+            random.randint(0, 400),
+            random.randint(0, 400),
+            random.randint(0, 400),
+            outline=random.choice(colors),
+            width=random.randint(1, 10)
+        )
+    # Add unpredictable text (fixed version)
+if random.random() > 0.7:
+    canvas.create_text(
+        random.randint(50, 350),
+        random.randint(50, 350),
+        text="?".join(chr(random.randint(33, 126)) for _ in range(random.randint(1, 5))),
+        fill=random.choice(colors),
+        font=("Arial", random.randint(10, 30))
+    )
+    
+    # Add psychedelic pattern
+    for _ in range(chaos_level * 3):
+        canvas.create_arc(
+            random.randint(0, 400),
+            random.randint(0, 400),
+            random.randint(0, 400),
+            random.randint(0, 400),
+            start=random.randint(0, 360),
+            extent=random.randint(10, 270),
+            style=random.choice([tk.ARC, tk.CHORD, tk.PIESLICE]),
+            outline=random.choice(colors),
+            width=random.randint(1, 5)
+        )
+
+root = tk.Tk()
+root.title("Chaotic Abstraction Generator")
+
+canvas = tk.Canvas(root, width=400, height=400, bg='black')
+canvas.pack(pady=10)
+
+generate_btn = tk.Button(root, text="Generate New Chaos", command=create_abstraction,
+                        bg='black', fg='white', font=('Arial', 12, 'bold'))
+generate_btn.pack(pady=5)
+
+root.mainloop()
