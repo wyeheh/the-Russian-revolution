@@ -1,2 +1,1 @@
-# the-Russian-revolution
-just be a Russian and sperd communism
+# this is not art this is a image and I don't advocate for anti artist ai tech bros
